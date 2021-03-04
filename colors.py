@@ -1,14 +1,15 @@
 from graph import *
-import copy
-from project.graph_io import load_graph, save_graph, write_dot
+from graph_io import load_graph, save_graph, write_dot
 from collections import Counter
 
 
-def color_graph(name_file):
-    with open(name_file) as f:
-        L = load_graph(f, read_list=True)
-
-    graph = L[0][2]
+def color_graph(graph):
+    # with open(name_file) as f:
+    #     L = load_graph(f, read_list=True)
+    #
+    #
+    # graph = L[0][0]
+    # graph = graph.__add__(L[0][3])
 
 
     for v in graph.vertices:
@@ -19,8 +20,8 @@ def color_graph(name_file):
     old_color_length = 0
     while can_update:
         can_update = False
-        print("iteration:")
-        print(i)
+        # print("iteration:")
+        # print(i)
         to_be_processed = graph.vertices
         colors = {}
         current_color = 0
@@ -42,10 +43,10 @@ def color_graph(name_file):
             for vertex in colors[color]:
                 vertex.colornum = color
 
-        print("old color length:")
-        print(old_color_length)
-        print("current color length:")
-        print(len(colors))
+        # print("old color length:")
+        # print(old_color_length)
+        # print("current color length:")
+        # print(len(colors))
 
         if old_color_length != len(colors):
             can_update = True
@@ -56,19 +57,11 @@ def color_graph(name_file):
     with open('colorful.dot', 'w') as f:
         write_dot(graph, f)
 
-
 def matching_neighbourhoods(vertex1, vertex2):
-    # print('vertex compare from')
-    # print(vertex1)
-    # print('vertex compare to')
-    # print(vertex2)
-    # print("Same or not")
-    # print(Counter([vertex.colornum for vertex in vertex1.neighbours]) == Counter(
-    #     [vertex.colornum for vertex in vertex2.neighbours]))
-
     return (Counter([vertex.colornum for vertex in vertex1.neighbours]) == Counter(
         [vertex.colornum for vertex in vertex2.neighbours]))
 
 
-if __name__ == '__main__':
-    color_graph('cref9vert_4_9.grl')
+# if __name__ == '__main__':
+# #     # color_graph('colorref_smallexample_6_15.grl')
+#     color_graph('cref9vert_4_9.grl')
