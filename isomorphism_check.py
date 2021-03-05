@@ -29,7 +29,6 @@ def preprocessing(g, h):
 def coldict(union):
     dictg={}
     dictv={}
-    color_graph(union)
 
     for v in union.vertices[0:len(union)//2]:
         dictg[v.colornum] = 0
@@ -43,12 +42,12 @@ def coldict(union):
     return dictg, dictv
 
 if __name__ == '__main__':
-    name_file = 'colorref_largeexample_4_1026.grl'
+    name_file = 'colorref_smallexample_6_15.grl'
 
     with open(name_file) as f:
         L = load_graph(f, read_list=True)
 
-    g = L[0][0]
-    h = L[0][2]
+    g = L[0][4]
+    h = L[0][3]
 
     print(preprocessing(g, h))
